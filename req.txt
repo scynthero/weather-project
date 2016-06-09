@@ -1,0 +1,6 @@
+HTML5+CSS+MySQL
+temperatura z ostatnich 10h (temperatura co 1h)
+szukajka względem daty i godziny i miasta
+wykres temperatur
+
+root:adminadmin
