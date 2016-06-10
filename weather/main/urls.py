@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^add_city$', views.add_city, name='add_city'),
 ]
