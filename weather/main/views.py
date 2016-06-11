@@ -1,14 +1,15 @@
 from django.shortcuts import render
 from .models import City
 from .forms import AddCity
+from .forms import ChngCity
 from django.shortcuts import redirect
 
 
 # Create your views here.
 
 def index(request):
-    cities = City.objects.all().order_by('name')
-    return render(request, 'main/index.html', {'cities': cities})
+    fom = ChngCity()
+    return render(request, 'main/index.html', {'fom': fom})
 
 
 def add_city(request):
