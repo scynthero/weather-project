@@ -2,6 +2,12 @@
 {% block content %}
 <body>
 	<h1>{{ weather }}</h1>
+	<h2>
+		{% for city in cityname %}
+			{{ city }}
+		{% endfor %}
+		{{ getpost }}
+	</h2>
 	<div>
 		<a href="{% url 'add_city' %}">Add your city</a>
 	</div>

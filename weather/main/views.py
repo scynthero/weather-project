@@ -4,21 +4,24 @@ from .models import City
 from .forms import AddCity
 from .forms import ChngCity
 from django.shortcuts import redirect
-import json
 api_key = '538929ced9d24f99ad7190651161106'
 client = ApixuClient(api_key)
 
 # Create your views here.
 
+
 def index(request):
-    current = client.getCurrentWeather(q='London')
-    weather = current['current']['temp_c']
     if request.method == "POST":
+        getpost = request.POST.get('city')
+        cityname = City.objects.filter(id=getpost).values_list('name')[0]
         form1 = ChngCity(request.POST)
-        return redirect('/')
     else:
+        cityname = City.objects.filter(id=2)
         form1 = ChngCity()
-    return render(request, 'main/index.html', {'form1': form1, 'weather': weather})
+
+    current = client.getCurrentWeather(q=cityname)
+    weather = current['current']['temp_c']
+    return render(request, 'main/index.html', {'form1': form1, 'weather': weather, 'cityname': cityname})
 
 
 def add_city(request):
