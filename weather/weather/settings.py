@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main'
+    'main',
+    'apixu',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -128,3 +129,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+#WUNDERGROUND_KEY = '3e0ca72f5fb9cbe8'
