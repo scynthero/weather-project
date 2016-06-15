@@ -11,4 +11,3 @@ class AddCity(forms.ModelForm):
 
 class ChngCity(forms.Form):
     city = forms.ModelChoiceField(queryset=City.objects.all().order_by('name'))
-

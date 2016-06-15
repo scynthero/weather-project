@@ -1,67 +1,41 @@
 {% extends 'main/base.html' %}
 {% block content %}
-<h1>
 	<h1>
 		{% for city in cityname %}
 			{{ city }}
 		{% endfor %}
-		{{ getpost }}
 	</h1>
 	<h2>
-	{% load googlecharts %}
-{# container #}
-<div id="out"></div>
-{% googlecharts %}
-    {# named data and options can be reused #}
-    {% data values "out_data" %}
-        {% col "string" "Name" %}"{{ val }}"{% endcol %}
-        {% col "number" "Value" %}{{ val }}{% endcol %}
-    {% enddata %}
-    {# you can also use global javascript variables here, #}
-    {# and call functions #}
-    {% options "out_options" %}
-        kind: "LineChart",
-        options: {
-            width: 2048,
-            height: 768
-        }
-    {% endoptions %}
-    {# chart is assembled from container, data and options #}
-    {% graph "out" "out_data" "out_options" %}
-{% endgooglecharts %}
+		{% load googlecharts %}
+		<div id="out"></div>
+		{% googlecharts %}
+    	{% data values "out_data" %}
+			{% col "string" "Name" %}"{{ val }}"{% endcol %}
+        	{% col "number" "Temperature" %}{{ val }}{% endcol %}
+    	{% enddata %}
+
+    	{% options "out_options" %}
+        	kind: "ColumnChart",
+        	options: {
+				backgroundColor: '#27ae60',
+            	height: 768,
+				legend: {position: 'none'}
+        	}
+    	{% endoptions %}
+
+    	{% graph "out" "out_data" "out_options" %}
+		{% endgooglecharts %}
 	</h2>
-	<table>
-		<tr>
-			{% for i in array2 %}
-				<td>{{i}}</td>
-			{% endfor %}
-		</tr>
-		<tr>
-			{% for i in array1 %}
-				<td>{{i}}</td>
-			{% endfor %}
-		</tr>
 
+	<form method="POST">{% csrf_token %}
+        {{ form1.as_p }}
+		<button type="submit" class="save btn btn-default">Change City</button>
+    </form>
 
-	</table>
-	<div>
+	<div id="add">
 		<a href="{% url 'add_city' %}">Add your city</a>
 	</div>
-
-
-
-
-		<form method="POST">{% csrf_token %}
-        {{ form1.as_p }}
-        <button type="submit" class="save btn btn-default">Change City</button>
-    	</form>
-
-
-
-
-<div class="copy-right">
-			<p>Weather-project</p>
-</div>
+	<footer>Weather-project</footer>
 
 </body>
 {% endblock content %}
