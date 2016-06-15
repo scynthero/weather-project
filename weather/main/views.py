@@ -19,9 +19,13 @@ def index(request):
         cityname = City.objects.filter(id=2)
         form1 = ChngCity()
 
-    current = client.getCurrentWeather(q=cityname)
-    weather = current['current']['temp_c']
-    return render(request, 'main/index.html', {'form1': form1, 'weather': weather, 'cityname': cityname})
+    forecast = client.getForecastWeather(q=cityname, days=10)
+    array1 = ['none'] * 10
+    for i in range(0, 10):
+        array1[i] = forecast['forecast']['forecastday'][i]['date'], \
+                    int(forecast['forecast']['forecastday'][i]['day']['avgtemp_c'])
+
+    return render(request, 'main/index.html', {'form1': form1, 'cityname': cityname, 'values': array1})
 
 
 def add_city(request):
